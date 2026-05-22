@@ -5,8 +5,11 @@ End-to-end demo: fetch block, rebuild Merkle root, prove and verify inclusion.
 import hashlib
 import os
 import sys
+from pathlib import Path
 
 from dotenv import load_dotenv
+
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 from app.ethereum import (
     fetch_block,
@@ -19,7 +22,9 @@ from app.verifier import verify_proof
 
 
 def _get_rpc_url() -> str:
-    load_dotenv()
+    # Always load from project root (not cwd) — file must be named .env
+    env_path = _PROJECT_ROOT / ".env"
+    load_dotenv(env_path)
     return (os.getenv("RPC_URL") or os.getenv("ETH_RPC_URL") or "").strip()
 
 
