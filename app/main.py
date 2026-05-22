@@ -23,7 +23,7 @@ from app.verifier import verify_proof
 
 def _get_rpc_url() -> str:
     # Always load from project root (not cwd) — file must be named .env
-    env_path = _PROJECT_ROOT / ".env"
+    env_path = _PROJECT_ROOT / ".env.example"
     load_dotenv(env_path)
     return (os.getenv("RPC_URL") or os.getenv("ETH_RPC_URL") or "").strip()
 
