@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - RPC_URL=${RPC_URL}
+      - BLOCK_NUMBER=${BLOCK_NUMBER:-19000000}
+      - TX_INDEX=${TX_INDEX:-0}
+
+  test:
+    build: .
+    command: ["pytest", "-v"]
+    environment:
+      - RPC_URL=${RPC_URL:-}
